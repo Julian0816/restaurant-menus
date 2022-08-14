@@ -34,21 +34,51 @@ describe('Restaurant and Menu Models', () => {
 
     test('can create a Menu', async () => {
         // TODO - write test
-        expect('NO TEST').toEqual('EXPECTED DATA')
+        const seedTestMenu = await Menu.create(seedMenu[0])
+        expect(seedTestMenu.name).toEqual(seedMenu[0].name)
     });
 
     test('can find Restaurants', async () => {
         // TODO - write test
-        expect('NO TEST').toEqual('EXPECTED DATA')
+        const findRestaurant = await Restaurant.findAll()
+        expect(findRestaurant.length).toEqual(1)
+        expect(findRestaurant[0].name).toEqual(seedRestaurant[0].name)
     });
 
     test('can find Menus', async () => {
         // TODO - write test
-        expect('NO TEST').toEqual('EXPECTED DATA')
+        const findMenu = await Menu.findAll()
+        expect(findMenu.length).toEqual(1)
+        expect(findMenu[0].name).toEqual(seedMenu[0].name)
     });
 
-    // test('can delete Restaurants', async () => {
-    //     // TODO - write test
-    //     expect('NO TEST').toEqual('EXPECTED DATA')
-    // });
+    test('can delete Restaurants', async () => {
+        // TODO - write test
+        const findRestaurant2 = await Restaurant.findAll()
+        const deleteRestaurant = await findRestaurant2[0].destroy() //Note, when we destroy something, it gets returned, that's why we save that desroyed objet in the variable we then .toEqual -> U get it dude? lol
+        expect(deleteRestaurant.name).toEqual(findRestaurant2[0].name)
+    });
+
+    test('Restaurant can have many menys', async () => {
+        await db.sync({force: true})
+
+        let newRestaurant = await Restaurant.create({
+            name: 'Wagamamas',
+           location: 'Birmingham',
+           cuisine: 'Japanese'
+        })
+    
+        let newMenu = await Menu.create({
+            title: 'Gyoza'
+        })
+    
+        await newRestaurant.addMenu(newMenu);
+
+        const menus = await newRestaurant.getMenus()
+
+        expect(menus[0] instanceof Menu).tobeTruthy
+        expect(menus[0] instanceof Menu).toBe(true)
+        expect(menus[0].title).toEqual(newMenu.title)      
+        expect(menus.length).toBe(1)
+    })
 })

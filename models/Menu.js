@@ -1,7 +1,6 @@
 const {db} = require('../db');
 const { Sequelize, DataTypes } = require('sequelize');
 
-
 const Menu = db.define('menu', {
     title: {
         type: DataTypes.STRING
@@ -10,10 +9,10 @@ const Menu = db.define('menu', {
 
 // async function main() {
 
-//     await Menu.sync()
+//     await Menu.sync({force: true})
 
 //     await Menu.create({
-//         title: 'Saver menu',
+//         title: 'Saver menu'
 //     })
 // }
 

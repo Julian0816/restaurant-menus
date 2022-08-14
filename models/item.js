@@ -4,26 +4,22 @@ const { Sequelize, DataTypes} = require('sequelize');
 /* Define the model!  Here are the details:
 
 Create a new Item file in the models directory
-
 The Item model should have name and image properties, both of which are strings
-
 The Item model should also have price (number) and vegetarian (boolean) properties */
 
-// const Item = db.define('Item', {
-//     name: {
-//         type: DataTypes.STRING
-//     },
-//     image: {
-//         type: DataTypes.STRING
-//     },
-//     vegetarian: {
-//         type: DataTypes.BOOLEAN
-//     },
-//     price: {
-//         type: DataTypes.REAL
-//     }
-// })
+const Item = db.define('Item', {
+    name: {
+        type: DataTypes.STRING
+    },
+    image: {
+        type: DataTypes.STRING
+    },
+    vegetarian: {
+        type: DataTypes.BOOLEAN
+    },
+    price: {
+        type: DataTypes.REAL
+    }
+})
 
-// module.exports = {
-//     item
-// }
+module.exports = {Item}
